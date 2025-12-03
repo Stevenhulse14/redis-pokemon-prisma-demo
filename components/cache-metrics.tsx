@@ -8,6 +8,11 @@ type Metrics = {
   hits: number;
   misses: number;
   hitRate: number;
+  total: number;
+  efficiency: number;
+  estimatedCacheSize: number;
+  lastReset: number | null;
+  timeSinceReset: string;
   redisEnabled: boolean;
   error?: string;
 };
@@ -105,9 +110,19 @@ export function CacheMetrics() {
     );
   }
 
-  const { hits, misses, hitRate, redisEnabled, error } = metrics;
-  const total = hits + misses;
+  const { 
+    hits, 
+    misses, 
+    hitRate, 
+    total,
+    efficiency,
+    estimatedCacheSize,
+    timeSinceReset,
+    redisEnabled, 
+    error 
+  } = metrics;
   const hitRatePercent = (hitRate * 100).toFixed(1);
+  const efficiencyPercent = efficiency.toFixed(1);
 
   // Color coding for hit rate
   const hitRateColor =
@@ -143,7 +158,7 @@ export function CacheMetrics() {
             {error && <span className="text-orange-400">⚠ {error}</span>}
           </div>
         </div>
-        <div className="flex items-center gap-3 text-[11px]">
+        <div className="flex flex-wrap items-center gap-3 text-[11px]">
           <div className="flex flex-col items-end">
             <span className="text-slate-400 text-[10px]">Hits</span>
             <span className="font-semibold text-emerald-300">
@@ -169,6 +184,39 @@ export function CacheMetrics() {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* Additional Analytics */}
+      {total > 0 && (
+        <div className="grid grid-cols-2 gap-3 border-t border-slate-700/50 pt-3 sm:grid-cols-4">
+          <div className="flex flex-col">
+            <span className="text-slate-400 text-[10px]">Efficiency</span>
+            <span className={`text-xs font-semibold ${
+              efficiency >= 70 ? "text-emerald-300" : efficiency >= 40 ? "text-yellow-300" : "text-orange-300"
+            }`}>
+              {efficiencyPercent}%
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-slate-400 text-[10px]">Cache Size</span>
+            <span className="text-xs font-semibold text-slate-200">
+              ~{estimatedCacheSize} items
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-slate-400 text-[10px]">Since Reset</span>
+            <span className="text-xs font-semibold text-slate-200">
+              {timeSinceReset}
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-slate-400 text-[10px]">Miss Rate</span>
+            <span className="text-xs font-semibold text-orange-300">
+              {total > 0 ? ((misses / total) * 100).toFixed(1) : "0"}%
+            </span>
+          </div>
+        </div>
+      )}
       </div>
 
       {/* Visual hit rate bar */}

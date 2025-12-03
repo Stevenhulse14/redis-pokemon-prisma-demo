@@ -20,6 +20,7 @@ export async function POST() {
     await Promise.all([
       redis.del("metrics:hits"),
       redis.del("metrics:misses"),
+      redis.set("metrics:lastReset", Date.now().toString()),
     ]);
 
     // Note: For a full clear, we'd need to use KEYS command or track keys

@@ -146,17 +146,17 @@ export default function PokemonDetailPage() {
       try {
         const res = await fetch(`/api/pokemon/${id}/moves`);
         if (res.ok) {
-        const result = (await res.json()) as MovesResponse;
-        if (!cancelled) {
-          setMoves(result);
-          // Show toast for moves cache status
-          if (result.source === "cache") {
-            toast.success("⚡ Moves Cached", {
-              description: "Moves loaded from Redis cache",
-              duration: 1500,
-            });
+          const result = (await res.json()) as MovesResponse;
+          if (!cancelled) {
+            setMoves(result);
+            // Show toast for moves cache status
+            if (result.source === "cache") {
+              toast.success("⚡ Moves Cached", {
+                description: "Moves loaded from Redis cache",
+                duration: 1500,
+              });
+            }
           }
-        }
         }
       } catch (err) {
         console.error("Failed to fetch moves:", err);
@@ -250,25 +250,36 @@ export default function PokemonDetailPage() {
       <CacheMetrics />
 
       <div className="rounded-2xl border border-indigo-500/40 bg-slate-950/60 p-6 shadow-[0_0_30px_rgba(56,189,248,0.2)]">
-        <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
-          {/* Sprite */}
-          <div className="relative">
-            <div className="absolute inset-0 rounded-full bg-slate-900/40 blur-xl"></div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={
-                pokemon.spriteUrl
-                  ? pokemon.spriteUrl.startsWith('http') || pokemon.spriteUrl.startsWith('//')
-                    ? pokemon.spriteUrl
-                    : pokemon.spriteUrl.startsWith('/')
-                      ? pokemon.spriteUrl
-                      : `/${pokemon.spriteUrl}`
-                  : "/placeholder.svg"
-              }
-              alt={pokemon.name}
-              className="relative z-10 h-48 w-48 object-contain drop-shadow-[0_0_30px_rgba(248,250,252,0.9)]"
-              crossOrigin={pokemon.spriteUrl?.startsWith('http') ? 'anonymous' : undefined}
-            />
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
+          {/* Sprite - Improved sizing and layout */}
+          <div className="flex-shrink-0">
+            <div className="relative mx-auto w-full max-w-xs lg:w-80">
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500/20 via-fuchsia-500/20 to-amber-300/20 blur-2xl"></div>
+              {/* Image container */}
+              <div className="relative flex aspect-square items-center justify-center rounded-2xl border border-indigo-500/30 bg-slate-900/40 p-8 backdrop-blur-sm">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={
+                    pokemon.spriteUrl
+                      ? pokemon.spriteUrl.startsWith("http") ||
+                        pokemon.spriteUrl.startsWith("//")
+                        ? pokemon.spriteUrl
+                        : pokemon.spriteUrl.startsWith("/")
+                        ? pokemon.spriteUrl
+                        : `/${pokemon.spriteUrl}`
+                      : "/placeholder.svg"
+                  }
+                  alt={pokemon.name}
+                  className="h-full w-full object-contain drop-shadow-[0_0_30px_rgba(248,250,252,0.9)]"
+                  crossOrigin={
+                    pokemon.spriteUrl?.startsWith("http")
+                      ? "anonymous"
+                      : undefined
+                  }
+                />
+              </div>
+            </div>
           </div>
 
           {/* Details */}
@@ -379,8 +390,10 @@ export default function PokemonDetailPage() {
                     className={`relative overflow-hidden rounded-lg border border-slate-700/50 bg-gradient-to-br ${gradient} p-3 backdrop-blur-sm`}
                   >
                     {/* Gradient overlay */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-30`} />
-                    
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-30`}
+                    />
+
                     {/* Content */}
                     <div className="relative z-10">
                       <div className="mb-2 flex items-start justify-between">
@@ -416,7 +429,9 @@ export default function PokemonDetailPage() {
                           PP: {move.pp}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-400">{move.description}</p>
+                      <p className="text-xs text-slate-400">
+                        {move.description}
+                      </p>
                     </div>
                   </div>
                 );
