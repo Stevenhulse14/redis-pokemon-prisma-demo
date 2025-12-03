@@ -1,6 +1,7 @@
 {
-  "name": "my-v0-project",
+  "name": "pokecache-arena",
   "version": "0.1.0",
+  "description": "Educational demo showcasing Redis cache-aside pattern with Next.js, Supabase, and Prisma. Features real-time cache metrics, toast notifications, and 50 Pokemon with type-based gradients.",
   "private": true,
   "scripts": {
     "build": "next build",
