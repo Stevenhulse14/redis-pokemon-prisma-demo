@@ -1,0 +1,59 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Pokemon {
+  id            Int      @id @default(autoincrement())
+  name          String   @unique
+  spriteUrl     String
+  typePrimary   String
+  typeSecondary String?
+  hp            Int
+  attack        Int
+  defense       Int
+  specialAttack Int
+  specialDefense Int
+  speed         Int
+
+  moves         PokemonMove[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Move {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  type        String
+  category    String   // "physical", "special", "status"
+  power       Int?     // null for status moves
+  accuracy    Int?     // null for some moves (e.g., always-hit moves)
+  pp          Int      // Power Points
+  description String
+
+  pokemon     PokemonMove[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PokemonMove {
+  id        Int     @id @default(autoincrement())
+  pokemonId Int
+  moveId    Int
+  level     Int?    // Level at which Pokemon learns this move (null for TMs/HMs)
+
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id], onDelete: Cascade)
+  move      Move    @relation(fields: [moveId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([pokemonId, moveId])
+  @@index([pokemonId])
+  @@index([moveId])
+}

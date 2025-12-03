@@ -1,0 +1,9 @@
+{
+  "/api/cache/check/route": "app/api/cache/check/route.js",
+  "/api/metrics/route": "app/api/metrics/route.js",
+  "/api/pokemon/[id]/moves/route": "app/api/pokemon/[id]/moves/route.js",
+  "/api/pokemon/[id]/route": "app/api/pokemon/[id]/route.js",
+  "/api/pokemon/route": "app/api/pokemon/route.js",
+  "/page": "app/page.js",
+  "/pokemon/[id]/page": "app/pokemon/[id]/page.js"
+}

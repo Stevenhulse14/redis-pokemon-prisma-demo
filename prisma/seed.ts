@@ -1,0 +1,250 @@
+// prisma/seed.ts
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+const pokemonData = [
+  {
+    name: "Charizard",
+    spriteUrl: "/charizard-pokemon.png",
+    typePrimary: "Fire",
+    typeSecondary: "Flying",
+    hp: 78,
+    attack: 84,
+    defense: 78,
+    speed: 100,
+  },
+  {
+    name: "Blastoise",
+    spriteUrl: "/blastoise-pokemon.jpg",
+    typePrimary: "Water",
+    typeSecondary: null,
+    hp: 79,
+    attack: 83,
+    defense: 100,
+    speed: 78,
+  },
+  {
+    name: "Venusaur",
+    spriteUrl: "/venusaur-pokemon.png",
+    typePrimary: "Grass",
+    typeSecondary: "Poison",
+    hp: 80,
+    attack: 82,
+    defense: 83,
+    speed: 80,
+  },
+  {
+    name: "Pikachu",
+    spriteUrl: "/pikachu-pokemon.jpg",
+    typePrimary: "Electric",
+    typeSecondary: null,
+    hp: 35,
+    attack: 55,
+    defense: 40,
+    speed: 90,
+  },
+  {
+    name: "Gengar",
+    spriteUrl: "/gengar-pokemon.jpg",
+    typePrimary: "Ghost",
+    typeSecondary: "Poison",
+    hp: 60,
+    attack: 65,
+    defense: 60,
+    speed: 110,
+  },
+  {
+    name: "Dragonite",
+    spriteUrl: "/dragonite-pokemon.jpg",
+    typePrimary: "Dragon",
+    typeSecondary: "Flying",
+    hp: 91,
+    attack: 134,
+    defense: 95,
+    speed: 80,
+  },
+  {
+    name: "Alakazam",
+    spriteUrl: "/alakazam-pokemon.jpg",
+    typePrimary: "Psychic",
+    typeSecondary: null,
+    hp: 55,
+    attack: 50,
+    defense: 45,
+    speed: 120,
+  },
+  {
+    name: "Machamp",
+    spriteUrl: "/machamp-pokemon.jpg",
+    typePrimary: "Fighting",
+    typeSecondary: null,
+    hp: 90,
+    attack: 130,
+    defense: 80,
+    speed: 55,
+  },
+  {
+    name: "Lapras",
+    spriteUrl: "/lapras-pokemon.jpg",
+    typePrimary: "Water",
+    typeSecondary: "Ice",
+    hp: 130,
+    attack: 85,
+    defense: 80,
+    speed: 60,
+  },
+  {
+    name: "Gyarados",
+    spriteUrl: "/gyarados-pokemon.jpg",
+    typePrimary: "Water",
+    typeSecondary: "Flying",
+    hp: 95,
+    attack: 125,
+    defense: 79,
+    speed: 81,
+  },
+  {
+    name: "Mewtwo",
+    spriteUrl: "/mewtwo-pokemon.jpg",
+    typePrimary: "Psychic",
+    typeSecondary: null,
+    hp: 106,
+    attack: 110,
+    defense: 90,
+    speed: 130,
+  },
+  {
+    name: "Articuno",
+    spriteUrl: "/articuno-pokemon.jpg",
+    typePrimary: "Ice",
+    typeSecondary: "Flying",
+    hp: 90,
+    attack: 85,
+    defense: 100,
+    speed: 85,
+  },
+  {
+    name: "Zapdos",
+    spriteUrl: "/zapdos-pokemon.jpg",
+    typePrimary: "Electric",
+    typeSecondary: "Flying",
+    hp: 90,
+    attack: 90,
+    defense: 85,
+    speed: 100,
+  },
+  {
+    name: "Moltres",
+    spriteUrl: "/moltres-pokemon.jpg",
+    typePrimary: "Fire",
+    typeSecondary: "Flying",
+    hp: 90,
+    attack: 100,
+    defense: 90,
+    speed: 90,
+  },
+  {
+    name: "Snorlax",
+    spriteUrl: "/snorlax-pokemon.jpg",
+    typePrimary: "Normal",
+    typeSecondary: null,
+    hp: 160,
+    attack: 110,
+    defense: 65,
+    speed: 30,
+  },
+  {
+    name: "Umbreon",
+    spriteUrl: "/umbreon-pokemon.jpg",
+    typePrimary: "Dark",
+    typeSecondary: null,
+    hp: 95,
+    attack: 65,
+    defense: 110,
+    speed: 65,
+  },
+  {
+    name: "Espeon",
+    spriteUrl: "/espeon-pokemon.jpg",
+    typePrimary: "Psychic",
+    typeSecondary: null,
+    hp: 65,
+    attack: 65,
+    defense: 60,
+    speed: 110,
+  },
+  {
+    name: "Tyranitar",
+    spriteUrl: "/placeholder.svg?height=96&width=96",
+    typePrimary: "Rock",
+    typeSecondary: "Dark",
+    hp: 100,
+    attack: 134,
+    defense: 110,
+    speed: 61,
+  },
+  {
+    name: "Lucario",
+    spriteUrl: "/placeholder.svg?height=96&width=96",
+    typePrimary: "Fighting",
+    typeSecondary: "Steel",
+    hp: 70,
+    attack: 110,
+    defense: 70,
+    speed: 90,
+  },
+  {
+    name: "Gardevoir",
+    spriteUrl: "/placeholder.svg?height=96&width=96",
+    typePrimary: "Psychic",
+    typeSecondary: "Fairy",
+    hp: 68,
+    attack: 65,
+    defense: 65,
+    speed: 80,
+  },
+  {
+    name: "Glaceon",
+    spriteUrl: "/placeholder.svg?height=96&width=96",
+    typePrimary: "Ice",
+    typeSecondary: null,
+    hp: 65,
+    attack: 60,
+    defense: 110,
+    speed: 65,
+  },
+  {
+    name: "Sylveon",
+    spriteUrl: "/placeholder.svg?height=96&width=96",
+    typePrimary: "Fairy",
+    typeSecondary: null,
+    hp: 95,
+    attack: 65,
+    defense: 65,
+    speed: 60,
+  },
+]
+
+async function main() {
+  console.log("🌱 Starting seed...")
+
+  for (const pokemon of pokemonData) {
+    await prisma.pokemon.upsert({
+      where: { name: pokemon.name },
+      update: {},
+      create: pokemon,
+    })
+  }
+
+  console.log(`✅ Seeded ${pokemonData.length} Pokémon`)
+}
+
+main()
+  .catch((e) => {
+    console.error("❌ Seed failed:", e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })

@@ -1,0 +1,3 @@
+{
+  "/api/pokemon/[id]/moves/route": "app/api/pokemon/[id]/moves/route.js"
+}
